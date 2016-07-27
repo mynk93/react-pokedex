@@ -1,0 +1,26 @@
+{
+  "name": "react-pokedex",
+  "version": "1.0.0",
+  "description": "React skeleton",
+  "main": "index.js",
+  "scripts": {
+    "start": "watchify src/main.jsx -v -t [ babelify --presets [ react ] ] -o public/js/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mayank-a93/react-pokedex"
+  },
+  "author": "Mayank Agarwal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mayank-a93/react-pokedex/issues"
+  },
+  "homepage": "https://github.com/mayank-a93/react-pokedex#readme",
+  "dependencies": {
+    "babel-preset-react": "^6.11.1",
+    "babelify": "^7.3.0",
+    "react": "^15.2.1",
+    "react-dom": "^15.2.1",
+    "watchify": "^3.7.0"
+  }
+}
