@@ -1,7 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var List = require('./components/List.jsx');
+var Pokemon = require('./components/Pokemon.jsx');
 
 
-const list = document.getElementById('ingredients');
-ReactDOM.render(<List />, list);
+const list = document.getElementById('main');
+ReactDOM.render(<Pokemon />, list);

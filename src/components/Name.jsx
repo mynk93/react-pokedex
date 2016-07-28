@@ -3,7 +3,10 @@ var React = require('react');
 var Name = React.createClass({
 	render: function() {
 		return (
-			<h5 src={this.props.name}></h5>
+			<div>
+				<h3>{this.props.value}</h3>
+				<h6>{'Pokemon #' + this.props.index}</h6>
+			</div>
 		);
 	}
 });
