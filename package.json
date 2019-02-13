@@ -5,13 +5,14 @@
   "dependencies": {
     "@material-ui/core": "^3.9.2",
     "axios": "^0.18.0",
-    "fetch-suspense": "^1.0.2",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "react-intersection-observer": "^8.0.1",
-    "react-scripts": "2.1.5"
+    "react-scripts": "2.1.5",
+    "source-map-explorer": "^1.6.0"
   },
   "scripts": {
+    "analyze": "source-map-explorer build/static/js/main.*",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

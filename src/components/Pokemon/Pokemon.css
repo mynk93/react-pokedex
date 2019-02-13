@@ -1,5 +1,7 @@
 .pokemon {
     text-align: center;
+    padding: 12px;
+    cursor: pointer;
 }
 
 .pokemon-image {

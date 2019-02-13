@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
 import { useInView } from 'react-intersection-observer'
-import alt from '../../alt.png'
 import './Pokemon.css';
 
 const imgUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/';
@@ -19,19 +19,50 @@ const Pokemon = props => {
   const {name, url} = props.data;
   const [ref, inView] = useInView({
     triggerOnce: true,
-    rootMargin: '30px',
+    rootMargin: '20px',
     threshold: 0,
   })
+  const [hoverRef, isHovered] = useHover();
   const idx = getIndex(url)
   
   return (
-    <div className="pokemon" ref={ref}>
-      <img className="pokemon-image" src={inView? (imgUrl + idx + '.png') : alt} alt={alt}/>
-      <Typography variant="h6" color="inherit" noWrap>
-        {capitalizeName(name)}
-      </Typography>
+    <div ref={hoverRef}>
+      <Paper className="pokemon" elevation={isHovered? 8 : 3}>
+        <img className="pokemon-image" ref={ref} src={inView? (imgUrl + idx + '.png') : (imgUrl + 0 + '.png')} alt={name}/>
+        <Typography variant="h6" color="inherit" noWrap>
+          {capitalizeName(name)}
+        </Typography>
+      </Paper>
     </div>
   );
+}
+
+// Hook
+function useHover() {
+  const [value, setValue] = useState(false);
+
+  const ref = useRef(null);
+
+  const handleMouseOver = () => setValue(true);
+  const handleMouseOut = () => setValue(false);
+
+  useEffect(
+    () => {
+      const node = ref.current;
+      if (node) {
+        node.addEventListener('mouseover', handleMouseOver);
+        node.addEventListener('mouseout', handleMouseOut);
+
+        return () => {
+          node.removeEventListener('mouseover', handleMouseOver);
+          node.removeEventListener('mouseout', handleMouseOut);
+        };
+      }
+    },
+    [ref.current] // Recall only if ref changes
+  );
+
+  return [ref, value];
 }
 
 export default Pokemon;
