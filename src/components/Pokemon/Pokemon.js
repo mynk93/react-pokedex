@@ -1,5 +1,7 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
+import { useInView } from 'react-intersection-observer'
+import alt from '../../alt.png'
 import './Pokemon.css';
 
 const imgUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/';
@@ -15,11 +17,16 @@ const getIndex = (data) => {
 
 const Pokemon = props => {
   const {name, url} = props.data;
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    rootMargin: '30px',
+    threshold: 0,
+  })
   const idx = getIndex(url)
   
   return (
-    <div className="pokemon">
-      <img className="pokemon-image" src={imgUrl + idx + '.png'}/>
+    <div className="pokemon" ref={ref}>
+      <img className="pokemon-image" src={inView? (imgUrl + idx + '.png') : alt} alt={alt}/>
       <Typography variant="h6" color="inherit" noWrap>
         {capitalizeName(name)}
       </Typography>

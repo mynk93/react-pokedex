@@ -21,7 +21,7 @@ const Header = props => {
   const { classes } = props;
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="fixed">
           <Toolbar>
             <Typography className={classes.title} variant="h5" color="inherit" noWrap>
               React Pokedex
