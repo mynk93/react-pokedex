@@ -9,7 +9,8 @@
     "react-dom": "^16.8.1",
     "react-intersection-observer": "^8.0.1",
     "react-scripts": "2.1.5",
-    "source-map-explorer": "^1.6.0"
+    "source-map-explorer": "^1.6.0",
+    "use-dark-mode": "^2.3.0"
   },
   "scripts": {
     "analyze": "source-map-explorer build/static/js/main.*",

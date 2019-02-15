@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {useInView} from 'react-intersection-observer';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Pokemon from '../Pokemon';
-import './PokemonList.css';
+import Paper from '@material-ui/core/Paper';
+import {Loader, Pokemon} from '../';
 import axios from 'axios';
+import './PokemonList.css';
 
 function PokemonList () {
   const [pokemonList, setData] = useState ([]);
@@ -36,15 +36,15 @@ function PokemonList () {
   }, []);
 
   return (
-    <div className="pokemon-list">
+    <Paper className="pokemon-list" elevation={0}>
       {pokemonList.map (pokemon => (
         <Pokemon data={pokemon} key={pokemon.name} />
       ))}
       <div className="infinite-scroll" ref={ref}>
-        {isLoading ? <CircularProgress /> : null}
+        {isLoading ? <Loader /> : null}
         {inView && !isLoading && !isError ? fetchData () : null}
       </div>
-    </div>
+    </Paper>
   );
 }
 

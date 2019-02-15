@@ -2,7 +2,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import {useInView} from 'react-intersection-observer';
-import useHover from '../../hooks/useHover';
+import useHover from '../../utils/useHover';
 import './Pokemon.css';
 
 const imgUrl =
@@ -36,7 +36,7 @@ const Pokemon = props => {
           src={inView ? imgUrl + idx + '.png' : imgUrl + 0 + '.png'}
           alt={name}
         />
-        <Typography variant="h6" color="inherit" noWrap>
+        <Typography variant="h6" color="default" noWrap>
           {capitalizeName (name)}
         </Typography>
       </Paper>

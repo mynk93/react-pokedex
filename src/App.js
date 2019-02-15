@@ -1,15 +1,21 @@
 import React from 'react';
 import './App.css';
-import Header from './components/Header';
-import PokemonList from './components/PokemonList';
+import {Header, PokemonList} from './components';
+import useDarkMode from 'use-dark-mode';
+import {MuiThemeProvider} from '@material-ui/core/styles';
+import {getLightTheme, getDarkTheme} from './utils/theme';
 
-const App = props => {
+function App () {
+  const darkMode = useDarkMode (false);
+
   return (
-    <div className="App">
-      <Header />
-      <PokemonList />
-    </div>
+    <MuiThemeProvider theme={darkMode.value ? getDarkTheme : getLightTheme}>
+      <div className="App">
+        <Header darkMode={darkMode} />
+        <PokemonList />
+      </div>
+    </MuiThemeProvider>
   );
-};
+}
 
 export default App;

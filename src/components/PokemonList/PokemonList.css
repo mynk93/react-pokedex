@@ -1,6 +1,6 @@
 .pokemon-list {
-    margin: 4em;
-    margin-top: 8em;
+    padding: 4em;
+    padding-top: 8em;
     display: grid;
     row-gap: 2em;
     column-gap: 2em;
