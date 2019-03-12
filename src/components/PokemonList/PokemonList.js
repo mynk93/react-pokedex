@@ -12,7 +12,9 @@ function PokemonList () {
   );
   const [isLoading, setIsLoading] = useState (false);
   const [isError, setIsError] = useState (false);
-  const [ref, inView] = useInView ({});
+  const [ref, inView] = useInView({
+    threshold: [0.3]
+  })
 
   const fetchData = async () => {
     setIsError (false);
@@ -41,7 +43,7 @@ function PokemonList () {
       ))}
       <div className="infinite-scroll" ref={ref}>
         {isLoading ? <Loader /> : null}
-        {inView && !isLoading && !isError ? fetchData () : null}
+        {inView && !isLoading && !isError ? fetchData() : null}
       </div>
     </Paper>
   );
