@@ -1,0 +1,95 @@
+
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:10.14.2
+version: 2
+jobs:
+  checkout_code:
+    <<: *defaults
+    steps:
+      - restore_cache:
+          keys:
+            - source-{{ .Branch }}-{{ .Revision }}
+            - source-{{ .Branch }}-
+            - source-
+
+      - checkout
+
+      - save_cache:
+          key: source-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - "~/repo"
+  install:
+    <<: *defaults
+    steps:
+      - restore_cache:
+          key: source-{{ .Branch }}-{{ .Revision }}
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: "Yarn install"
+          command: yarn install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+  test:
+    <<: *defaults
+    steps:
+      - restore_cache:
+          key: source-{{ .Branch }}-{{ .Revision }}
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: "Test"
+          command: npm run test
+  build:
+    <<: *defaults
+    steps:
+      - restore_cache:
+          key: source-{{ .Branch }}-{{ .Revision }}
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: "Build app"
+          command: npm run build
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - dist
+            - package.json
+  deploy:
+    <<: *defaults
+    environment:
+      - PRODUCTION_BUCKET: mayank-react-pokedex
+      - PRODUCTION_DISTRIBUTION_ID: E2DP9Q8LMPONLB
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run: sudo apt-get update && sudo apt-get install -y python-dev
+      - run: sudo curl -O https://bootstrap.pypa.io/get-pip.py
+      - run: sudo python get-pip.py
+      - run: sudo pip install awscli --upgrade
+      - run: aws --version
+      - run: aws s3 ls
+      - run: 
+          name: "Deploy to S3"
+          command: |
+            aws s3 sync dist/ s3://${PRODUCTION_BUCKET} --delete
+            aws cloudfront create-invalidation --distribution-id "${PRODUCTION_DISTRIBUTION_ID}" --paths /index.html
+            
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - checkout_code
+      - install:
+          requires:
+            - checkout_code
+      - build:
+          requires:
+            - install
+      - deploy:
+          requires:
+            - build
