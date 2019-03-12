@@ -15,7 +15,6 @@ function PokemonList () {
   const [ref, inView] = useInView ({});
 
   const fetchData = async () => {
-    console.log ('fetch data called');
     setIsError (false);
     setIsLoading (true);
 

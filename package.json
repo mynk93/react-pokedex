@@ -5,12 +5,12 @@
   "dependencies": {
     "@material-ui/core": "^3.9.2",
     "axios": "^0.18.0",
-    "react": "^16.8.1",
-    "react-dom": "^16.8.1",
-    "react-intersection-observer": "^8.0.1",
-    "react-scripts": "2.1.5",
-    "source-map-explorer": "^1.6.0",
-    "use-dark-mode": "^2.3.0"
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "react-intersection-observer": "^8.22.1",
+    "react-scripts": "2.1.8",
+    "source-map-explorer": "^1.7.0",
+    "use-dark-mode": "^2.3.1"
   },
   "scripts": {
     "analyze": "source-map-explorer build/static/js/main.*",

@@ -15,7 +15,7 @@ const Header = props => {
           </Typography>
           <Tooltip title="Toggle light/dark theme">
             <IconButton color="inherit" onClick={props.darkMode.toggle}>
-              <i class="material-icons">
+              <i className="material-icons">
                 {props.darkMode.value ? 'brightness_3' : 'brightness_7'}
               </i>
             </IconButton>

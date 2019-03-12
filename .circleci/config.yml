@@ -62,8 +62,8 @@ jobs:
   deploy:
     <<: *defaults
     environment:
-      - PRODUCTION_BUCKET: ${PRODUCTION_BUCKET}
-      - PRODUCTION_DISTRIBUTION_ID: ${PRODUCTION_DISTRIBUTION_ID}
+      - PRODUCTION_BUCKET: ${{PRODUCTION_BUCKET}}
+      - PRODUCTION_DISTRIBUTION_ID: ${{PRODUCTION_DISTRIBUTION_ID}}
     steps:
       - attach_workspace:
           at: ~/repo
