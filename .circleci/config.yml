@@ -57,7 +57,7 @@ jobs:
       - persist_to_workspace:
           root: ~/repo
           paths:
-            - dist
+            - build
             - package.json
   deploy:
     <<: *defaults
@@ -76,7 +76,7 @@ jobs:
       - run: 
           name: "Deploy to S3"
           command: |
-            aws s3 sync dist/ s3://${PRODUCTION_BUCKET} --delete
+            aws s3 sync build/ s3://${PRODUCTION_BUCKET} --delete
             aws cloudfront create-invalidation --distribution-id "${PRODUCTION_DISTRIBUTION_ID}" --paths /index.html
             
 workflows:
