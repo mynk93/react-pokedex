@@ -8,3 +8,4 @@
  - Creating custom hooks to reuse shared logic
  - Intersection Observer for infinite scrolling and lazy loading images
  - Dark mode theming
+ - CI/CD using CircleCI
